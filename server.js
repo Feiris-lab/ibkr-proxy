@@ -9,12 +9,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.all('*', (req, res) => {
   const options = {
-    hostname: 'a9ae-46-193-65-199.ngrok-free.app', 
+    hostname: 'a9ae-46-193-65-199.ngrok-free.app', // Ton URL ngrok actuelle
     port: 443, // HTTPS par défaut
     path: req.originalUrl,
     method: req.method,
     headers: req.headers,
-    rejectUnauthorized: false 
+    rejectUnauthorized: false // Permet d'accepter les certificats ngrok
   };
 
   const proxy = https.request(options, (proxyRes) => {
