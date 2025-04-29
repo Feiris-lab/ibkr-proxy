@@ -9,13 +9,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.all('*', (req, res) => {
   const options = {
-    hostname: 'localhost',
-    port: 5001,
+    hostname: 'a9ae-46-193-65-190.ngrok-free.app',
+    port: 443,
     path: req.originalUrl,
     method: req.method,
-    headers: req.headers
+    headers: req.headers,
   };
-
+options.rejectUnauthorized = false;
+  
   const proxy = https.request(options, (proxyRes) => {
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(res, { end: true });
