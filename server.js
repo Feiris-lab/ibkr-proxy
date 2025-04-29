@@ -9,14 +9,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.all('*', (req, res) => {
   const options = {
-    hostname: 'a9ae-46-193-65-190.ngrok-free.app',
-    port: 443,
+    hostname: 'a9ae-46-193-65-199.ngrok-free.app', 
+    port: 443, // HTTPS par défaut
     path: req.originalUrl,
     method: req.method,
     headers: req.headers,
+    rejectUnauthorized: false 
   };
-options.rejectUnauthorized = false;
-  
+
   const proxy = https.request(options, (proxyRes) => {
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(res, { end: true });
@@ -33,4 +33,3 @@ options.rejectUnauthorized = false;
 app.listen(PORT, () => {
   console.log(`Proxy server running on port ${PORT}`);
 });
-
